@@ -1,11 +1,12 @@
-import {
-  AiFillTwitterCircle,
-  AiFillLinkedin,
-  AiFillYoutube,
-} from "react-icons/ai";
-
+import { FaLinkedin } from "react-icons/fa";
+import Card from "./Components/Card";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 function App() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+  });
   return (
     <>
       <header>
@@ -35,7 +36,12 @@ function App() {
             </ul>
           </nav>
 
-          <div className="text-center">
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0.5 }}
+            animate={{ opacity: inView ? 1 : 1, transition: { duration: 0.15, delay: 0.50 } }}
+            className="text-center"
+          >
             <h2 className="text-5xl py-2 text-teal-600 font-medium md:text-6xl">
               Kumar Kanchari
             </h2>
@@ -47,24 +53,35 @@ function App() {
             <p className="text-2xl py-2 md:text-3xl">
               Apsiring developer looking to become a full stack developer
             </p>
-          </div>
+          </motion.div>
 
-          <div className="flex text-5xl mt-10 justify-center gap-8 text-teal-600">
-            <AiFillLinkedin />
-            <AiFillTwitterCircle />
-            <AiFillYoutube />
-          </div>
+          <motion.div
+          ref={ref}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: inView ? 1 : 1, transition: { duration: 0.7, delay: 0.50 } }}
+          
+          className="flex text-5xl mt-10 justify-center gap-8 text-teal-600">
+            <FaLinkedin />
+          </motion.div>
 
-          <div className="flex mx-auto relative bg-gradiant-to-b from text-teal-500 mt-20 justify-center w-full">
+          <motion.div 
+          ref={ref}
+          initial={{ opacity: 0.5 }}
+          animate={{ opacity: inView ? 1 : 1, transition: { duration: 0.7, delay: 0.50 } }}
+          className="flex mx-auto relative bg-gradiant-to-b from text-teal-500 mt-20 justify-center w-full">
             <img
               class="object-fit"
               src="https://media.istockphoto.com/id/1262199842/photo/profile-picture-of-millennial-asian-girl-posing.jpg?s=1024x1024&w=is&k=20&c=WnGuSja-IoH1Uyzfaf1DgwI0Kp2yBlFbtPx2i6CxfPQ="
-              alt="profile picture"
+              alt="profile"
             ></img>
-          </div>
+          </motion.div>
         </section>
 
-        <section className="mt-20">
+        <motion.section
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: inView ? 1 : 0, transition: { duration: 0.7, delay: 0.50 } }}
+        className="mt-20">
           <div class="">
             <h3 class="text-3xl py-1 dark:text-white">Services I offer</h3>
             <p class="text-lg py-2 leading-8 text-gray-800 dark:text-neutral-300">
@@ -80,64 +97,9 @@ function App() {
               teaching.
             </p>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="grid mt-4 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <div className="container mx-auto bg-white rounded-3xl shadow-lg p-8">
-            <div className="text-center">
-              <h4 className="mb-2">
-                Beautiful Designs
-              </h4>
-              <p className="mb-3">
-              Creating elegant designs suited for your needs following core design theory.
-              </p>
-              <p className="text-teal-600 mb-2">
-              Design tools I use
-              </p>
-
-              <p>Photoshop</p>
-              <p>Illustrator</p>
-              <p>Figma</p>
-            </div>
-          </div>
-
-          <div className="container mx-auto bg-white rounded-3xl shadow-lg p-8">
-            <div className="text-center">
-              <h4 className="mb-2">
-                Beautiful Designs
-              </h4>
-              <p className="mb-3">
-              Creating elegant designs suited for your needs following core design theory.
-              </p>
-              <p className="text-teal-600 mb-2">
-              Design tools I use
-              </p>
-
-              <p>Photoshop</p>
-              <p>Illustrator</p>
-              <p>Figma</p>
-            </div>
-          </div>
-
-          <div className="container mx-auto bg-white rounded-3xl shadow-lg p-8">
-            <div className="text-center">
-              <h4 className="mb-2">
-                Beautiful Designs
-              </h4>
-              <p className="mb-3">
-              Creating elegant designs suited for your needs following core design theory.
-              </p>
-              <p className="text-teal-600 mb-2">
-              Design tools I use
-              </p>
-
-              <p>Photoshop</p>
-              <p>Illustrator</p>
-              <p>Figma</p>
-            </div>
-          </div>
-        
-        </section>
+        <Card />
       </main>
     </>
   );
